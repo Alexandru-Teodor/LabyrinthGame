@@ -1,8 +1,6 @@
 const container = document.getElementById("container");
 
 function makeGrid(rows, cols) {
-	container.style.setProperty("--grid-rows", rows);
-	container.style.setProperty("--grid-cols", cols);
 	for (c = 0; c < rows * cols; c++) {
 		let cell = document.createElement("div");
 		container.appendChild(cell).className = "grid-item";
@@ -85,7 +83,6 @@ let player = document.createElement("div");
 player.classList.add("player");
 document.getElementById("0").appendChild(player);
 i = 0, j = 0;
-let lastElem = road[road.length - 1]
 
 function arrIncludes(i_val, j_val) {
 	let roadLen = road.length;
@@ -138,16 +135,6 @@ function keyEvent(e) {
 			document.getElementById(cell_id.toString()).appendChild(player);
 		}
 	}
-	else if (e.key === "ArrowLeft") {
-		j_next = j - 1;
-		if (arrIncludes(i, j_next)) {
-			let cell_id = i * 10 + j;
-			document.getElementById(cell_id.toString()).removeChild(player);
-			--j;
-			cell_id = i * 10 + j;
-			document.getElementById(cell_id.toString()).appendChild(player);
-		}
-	}
 	else if (e.key === "ArrowRight") {
 		j_next = j + 1;
 		if (arrIncludes(i, j_next)) {
@@ -163,5 +150,4 @@ function keyEvent(e) {
 		winFunc()
 		window.removeEventListener("keydown", keyEvent);
 	}
-	isIncluded = false;
 };
