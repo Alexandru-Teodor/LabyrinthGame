@@ -68,8 +68,6 @@ function genRandPos() {
 
 mt[0][0] = 0;
 genRandPos();
-console.log("Final mt");
-console.log(mt);
 
 function createMaze() {
 	for (i = 0; i < n; ++i) {
