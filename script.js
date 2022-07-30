@@ -30,7 +30,7 @@ function isOk(i_next, j_next) {
 let road = [[0, 0]];
 
 function genRandPos() {
-	let ok = true, prev_i = 0, prev_j = 0;
+	let ok = true, prev_i = 0, prev_j = 0, returned = false;
 	i = 0, j = 0;
 	while (ok) {
 		let i_next, j_next;
@@ -43,6 +43,11 @@ function genRandPos() {
 			}
 		}
 		if (auxArr.length) {
+			if (returned) {
+				road.push([i, j]);
+				returned = false;
+			}
+
 			let next_pos = auxArr[Math.floor(Math.random() * auxArr.length)];
 			i_next = i + di[next_pos];
 			j_next = j + dj[next_pos];
@@ -60,6 +65,7 @@ function genRandPos() {
 			let aux = road.pop();
 			i = aux[0];
 			j = aux[1];
+			returned = true;
 		}
 	}
 }
@@ -95,7 +101,6 @@ function arrIncludes(i_val, j_val) {
 }
 
 function winFunc() {
-	console.log("Win");
 	const elem = document.createElement("div");
 	elem.setAttribute("id", "win-div");
 	elem.innerHTML = "You win!";
@@ -117,7 +122,6 @@ function keyEvent(e) {
 	else if (e.key === "ArrowDown") {
 		i_next = i + 1;
 		if (arrIncludes(i_next, j)) {
-			// console.log(road.includes([i_next, j]))
 			let cell_id = i * 10 + j;
 			document.getElementById(cell_id.toString()).removeChild(player);
 			++i;
